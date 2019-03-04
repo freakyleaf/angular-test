@@ -1,0 +1,36 @@
+<form class="form" ng-show="cityDataSuccess">
+    <div class="form-element--text">
+        <label class="form-element__label" for="cityNumber">Number of cities</label>
+        <span class="form-element__label-helper">Enter the numbr of random cities you would like to retrieve data for (maximum 10)</span>
+        <input class="form-element__input" ng-model="cityNumber" name="cityNumber" type="number" min="1" max="10">
+        <!-- <div role="alert" class="alert--state-error">
+            <div class="alert__content"> <span class="alert__text">Validation error.</span></div>
+        </div> -->
+    </div>
+    <button class="button--large-solid-primary" ng-click="getWeather()">Get Weather</button>
+</form>
+
+<div role="alert" class="alert--state-error" ng-show="errorMessage.length">
+    <div class="alert__content">
+        <span class="alert__text">{{errorMessage}}</span>
+    </div>
+</div>
+
+<table class="table table--striped" ng-show="tableParams.data.length" ng-table="tableParams" show-filter="true">
+    <tbody>
+        <tr ng-repeat="city in tableParams.data" ts-repeat ts-hide-no-data>
+            <td title="'Name'" filter="{ name: 'text'}" sortable="'name'">
+                <span>{{ city.name }}</span>
+            </td>
+            <td title="'Temperature'" filter="{ temperature: 'number'}" sortable="'temperature'">
+                <span>{{ city.main.temp }}°C</span>
+            </td>
+            <td title="'Minimum Temperature'" filter="{ temperatureMin: 'number'}" sortable="'temperatureMin'">
+                <span>{{ city.main.temp_min }}°C</span>
+            </td>
+            <td title="'Maximum Temperature'" filter="{ temperatureMax: 'number'}" sortable="'temperatureMax'">
+                <span>{{ city.main.temp_max }}°C</span>
+            </td>
+        </tr>
+    </tbody>
+</table>
